@@ -1,0 +1,38 @@
+<form [formGroup]="settingsForm" (ngSubmit)="saveSettings()">
+    <div class="form-group">
+        <label>Report Title</label>
+        <input nz-input formControlName="reportTitle" placeholder="📋 Weekly Team Report" />
+    </div>
+
+    <div class="form-group">
+        <label>Team Name</label>
+        <input nz-input formControlName="teamName" placeholder="e.g., Web Development" />
+    </div>
+
+    <div class="form-group">
+        <label>Submitted By</label>
+        <input nz-input formControlName="submittedBy" placeholder="Your name" />
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Week Start Date</label>
+            <nz-date-picker formControlName="weekStartDate" nzFormat="MMM d, yyyy" [nzAllowClear]="false"
+                style="width: 100%">
+            </nz-date-picker>
+        </div>
+
+        <div class="form-group">
+            <label>Week End Date</label>
+            <nz-date-picker formControlName="weekEndDate" nzFormat="MMM d, yyyy" [nzAllowClear]="false"
+                style="width: 100%">
+            </nz-date-picker>
+        </div>
+    </div>
+
+    <div class="fixed-footer">
+        <button nz-button nzType="primary" class="main-btn w-100" [disabled]="settingsForm.invalid">
+            Save Settings
+        </button>
+    </div>
+</form>

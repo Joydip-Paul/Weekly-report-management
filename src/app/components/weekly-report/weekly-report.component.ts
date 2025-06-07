@@ -9,6 +9,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { TaskListComponent } from "../task-list/task-list.component";
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TeamSettingComponent } from '../team-setting/team-setting.component';
+import { TeamConfig } from '../../models/team.model';
+import { TeamSetupService } from '../../services/team-setup/team-setup.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weekly-report',
@@ -20,13 +24,19 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class WeeklyReportComponent implements OnInit {
   members: Member[] = [];
   private drawerService = inject(NzDrawerService);
+  teamConfig: TeamConfig = {} as TeamConfig;
+  private configSubscription?: Subscription;
 
-  constructor(private modalService: NzModalService, private message: NzMessageService) {
+  constructor(private modalService: NzModalService, private message: NzMessageService, private teamConfigService: TeamSetupService) {
 
   }
 
   ngOnInit(): void {
     this.loadMembers();
+
+    this.configSubscription = this.teamConfigService.config$.subscribe(config => {
+      this.teamConfig = config;
+    });
   }
 
   openAddMember(): void {
@@ -54,6 +64,21 @@ export class WeeklyReportComponent implements OnInit {
       : [];
   }
 
+
+  openTeamSettings(): void {
+    const drawerRef = this.drawerService.create<TeamSettingComponent, any, DrawerResult>({
+      nzTitle: 'Team Settings',
+      nzClosable: true,
+      nzWrapClassName: 'md-drawer calc-body',
+      nzContent: TeamSettingComponent
+    });
+
+    drawerRef.afterClose.subscribe((result: DrawerResult | undefined) => {
+      if (result && result.success) {
+        // Config will be automatically updated via the service subscription
+      }
+    });
+  }
 
   onMemberDeleted(): void {
     this.loadMembers();
