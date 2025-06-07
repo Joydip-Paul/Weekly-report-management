@@ -1,52 +1,59 @@
-<div class="report-heading">
-    <div class="container">
-        <div class="report-heading-wrapper">
-            <div class="left">
-                <h3>{{ teamConfig.reportTitle || '📋 Weekly Team Report' }}</h3>
-                <p>Week: {{ teamConfig.weekStartDate }} - {{ teamConfig.weekEndDate }}</p>
-            </div>
-            <div class="right">
-                <ul>
-                    <li>Team: {{ teamConfig.teamName }}</li>
-                    <li>Submitted By: {{ teamConfig.submittedBy }}</li>
-                </ul>
-                <button class="settings-btn" (click)="openTeamSettings()" title="Team Settings">
-                    <span nz-icon nzType="setting" nzTheme="outline"></span>
-                </button>
+<div #pdfContent id="pdf-content">
+    <div class="report-heading">
+        <div class="container">
+            <div class="report-heading-wrapper">
+                <div class="left">
+                    <h3>{{ teamConfig.reportTitle || '📋 Weekly Team Report' }}</h3>
+                    <p>Week: {{ teamConfig.weekStartDate }} - {{ teamConfig.weekEndDate }}</p>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li>Team: {{ teamConfig.teamName }}</li>
+                        <li>Submitted By: {{ teamConfig.submittedBy }}</li>
+                    </ul>
+                    <button class="main-btn bg-white" (click)="openTeamSettings()" title="Team Settings">
+                        <span nz-icon nzType="setting" nzTheme="outline"></span>
+                    </button>
+                    <button class="main-btn bg-white" (click)="downloadPDF()" title="Team Settings">
+                        <span nz-icon nzType="download" nzTheme="outline"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="report-body">
-        <div class="sub-heading">
-            <h4>Team Members & Tasks</h4>
-            <button class="main-btn" (click)="openAddMember()"><span nz-icon nzType="plus" nzTheme="outline"></span> Add
-                Team Member</button>
-        </div>
-        <ng-template #noMembers>
-            <div class="no-data">
-                <h3>No team members added yet</h3>
-                <p>Add your team members to start tracking their weekly tasks.</p>
+    <div class="container">
+        <div class="report-body">
+            <div class="sub-heading">
+                <h4>Team Members & Tasks</h4>
                 <button class="main-btn" (click)="openAddMember()"><span nz-icon nzType="plus" nzTheme="outline"></span>
                     Add
-                    First Team
-                    Member</button>
+                    Team Member</button>
             </div>
-        </ng-template>
+            <ng-template #noMembers>
+                <div class="no-data">
+                    <h3>No team members added yet</h3>
+                    <p>Add your team members to start tracking their weekly tasks.</p>
+                    <button class="main-btn" (click)="openAddMember()"><span nz-icon nzType="plus"
+                            nzTheme="outline"></span>
+                        Add
+                        First Team
+                        Member</button>
+                </div>
+            </ng-template>
 
-        <ng-container *ngIf="members.length > 0; else noMembers">
-            <ul class="member-list">
-                <li *ngFor="let member of members; let i = index">
-                    <app-task-list [member]="member" [index]="i" (memberDeleted)="onMemberDeleted()">
-                    </app-task-list>
-                </li>
-            </ul>
-        </ng-container>
+            <ng-container *ngIf="members.length > 0; else noMembers">
+                <ul class="member-list">
+                    <li *ngFor="let member of members; let i = index">
+                        <app-task-list [member]="member" [index]="i" (memberDeleted)="onMemberDeleted()">
+                        </app-task-list>
+                    </li>
+                </ul>
+            </ng-container>
 
-        <ng-template #noMembers>
-            <p>No team members added yet.</p>
-        </ng-template>
+            <ng-template #noMembers>
+                <p>No team members added yet.</p>
+            </ng-template>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -13,6 +13,8 @@ import { TeamSettingComponent } from '../team-setting/team-setting.component';
 import { TeamConfig } from '../../models/team.model';
 import { TeamSetupService } from '../../services/team-setup/team-setup.service';
 import { Subscription } from 'rxjs';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-weekly-report',
@@ -36,6 +38,36 @@ export class WeeklyReportComponent implements OnInit {
 
     this.configSubscription = this.teamConfigService.config$.subscribe(config => {
       this.teamConfig = config;
+    });
+  }
+
+
+  @ViewChild('pdfContent') pdfContent!: ElementRef;
+
+  downloadPDF() {
+    const data = this.pdfContent.nativeElement;
+
+    html2canvas(data).then(canvas => {
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const imgData = canvas.toDataURL('image/png');
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save('weekly-report.pdf');
     });
   }
 
@@ -75,7 +107,7 @@ export class WeeklyReportComponent implements OnInit {
 
     drawerRef.afterClose.subscribe((result: DrawerResult | undefined) => {
       if (result && result.success) {
-        // Config will be automatically updated via the service subscription
+        this.onMemberDeleted();
       }
     });
   }

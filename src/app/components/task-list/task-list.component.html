@@ -8,7 +8,8 @@
         <button class="main-btn bg-white" (click)="openTaskForm()">
             <span nz-icon nzType="plus" nzTheme="outline"></span> Add Task
         </button>
-        <button class="main-btn delete-btn" (click)="deleteMember()" title="Delete Member">
+        <button class="main-btn delete-btn" (click)="deleteMember()" nzTooltipTitle="Delete Member with all tasks"
+            nzTooltipPlacement="top" nz-button nz-tooltip>
             <span nz-icon nzType="delete" nzTheme="outline"></span>
         </button>
     </div>
@@ -32,9 +33,13 @@
                         <td class="module-cell">
                             <span class="module-name">{{task.module}}</span>
                         </td>
-                        <td class="description-cell" data-label="Description">
+                        <td class="description-cell" data-label="Description" nz-popover nzType="primary"
+                            nzPopoverTitle={{task.module}} nzPopoverContent={{task.description}}
+                            nzPopoverTrigger="click">
                             <span class="description-text">{{task.description}}</span>
                         </td>
+
+
                         <td class="progress-cell" data-label="Progress">
                             <div class="progress-container">
                                 <div class="progress-bar">

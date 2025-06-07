@@ -33,7 +33,6 @@ export class TeamSettingComponent {
   ngOnInit(): void {
     const config = this.teamConfigService.getConfig();
 
-    // Parse date strings to Date objects
     const startDate = this.parseDate(config.weekStartDate);
     const endDate = this.parseDate(config.weekEndDate);
 
@@ -46,12 +45,11 @@ export class TeamSettingComponent {
     });
   }
 
-  // Helper method to parse date strings
   private parseDate(dateStr: string): Date {
     try {
       return new Date(dateStr);
     } catch (e) {
-      return new Date(); // Return current date as fallback
+      return new Date();
     }
   }
 
@@ -59,7 +57,6 @@ export class TeamSettingComponent {
     if (this.settingsForm.valid) {
       const formValue = this.settingsForm.value;
 
-      // Format dates properly
       const startDate = formValue.weekStartDate ?
         this.formatDate(formValue.weekStartDate) :
         this.formatDate(new Date());
@@ -82,7 +79,6 @@ export class TeamSettingComponent {
     }
   }
 
-  // Helper method to format dates consistently
   private formatDate(date: Date | string): string {
     const d = typeof date === 'string' ? new Date(date) : date;
     return d.toLocaleDateString('en-US', {

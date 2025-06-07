@@ -19,7 +19,6 @@ export class TeamSetupService {
   public config$ = this.configSubject.asObservable();
 
   constructor() {
-    // Initialize with stored config or default
     this.loadConfig();
   }
 
@@ -63,7 +62,7 @@ export class TeamSetupService {
   private getCurrentWeekStart(): string {
     const today = new Date();
     const dayOfWeek = today.getDay();
-    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust for Monday start
+    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
     const monday = new Date(today.setDate(diff));
     return this.formatDate(monday);
   }
@@ -71,7 +70,7 @@ export class TeamSetupService {
   private getCurrentWeekEnd(): string {
     const today = new Date();
     const dayOfWeek = today.getDay();
-    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? 0 : 5); // Adjust for Friday end
+    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? 0 : 5);
     const friday = new Date(today.setDate(diff));
     return this.formatDate(friday);
   }

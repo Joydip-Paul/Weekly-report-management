@@ -2,6 +2,7 @@
 
     &-heading {
         background-color: #1b7db1;
+        // border-radius: 5px;
 
         &-wrapper {
             display: flex;
@@ -45,24 +46,8 @@
                     }
                 }
 
-                .settings-btn {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 8px;
-                    border: 1px solid #d1d5db;
-                    background: white;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                    color: #6b7280;
-
-                    &:hover {
-                        background: #f9fafb;
-                        border-color: #9ca3af;
-                        color: #374151;
-                    }
+                .main-btn {
+                    padding: 10px;
                 }
             }
         }
@@ -101,4 +86,10 @@
             }
         }
     }
+}
+
+#pdf-content {
+    background: white;
+    // padding: 20px;
+    font-family: Arial, sans-serif;
 }

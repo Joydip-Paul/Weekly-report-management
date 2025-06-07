@@ -7,11 +7,13 @@ import { CommonModule } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, NzIconModule, NzMessageModule, NzModalModule],
+  imports: [CommonModule, NzIconModule, NzMessageModule, NzModalModule, NzPopoverModule, NzToolTipModule],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
@@ -133,17 +135,9 @@ export class TaskListComponent {
           if (!data) return;
 
           const members = JSON.parse(data);
-
-          // Remove the member at the specified index
           members.splice(this.index, 1);
-
-          // Save back to localStorage
           localStorage.setItem('teamMembers', JSON.stringify(members));
-
-          // Emit event to parent component to refresh the list
           this.memberDeleted.emit(this.index);
-
-          // Show success message
           this.message.success(`${this.member.name} has been deleted successfully.`);
         } catch (error) {
           console.error('Error deleting member:', error);
