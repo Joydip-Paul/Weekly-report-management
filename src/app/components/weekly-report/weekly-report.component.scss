@@ -25,6 +25,13 @@
                     color: #fff;
                     font-weight: 600;
                     margin-bottom: 3px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    img {
+                        width: 35px;
+                    }
                 }
 
                 p {

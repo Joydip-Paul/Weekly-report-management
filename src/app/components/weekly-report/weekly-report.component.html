@@ -3,7 +3,10 @@
         <div class="container">
             <div class="report-heading-wrapper">
                 <div class="left">
-                    <h3>{{ teamConfig.reportTitle || '📋 Weekly Team Report' }}</h3>
+                    <h3>
+                        <img src="assets/img/report.svg" alt="Icon">
+                        {{ teamConfig.reportTitle || 'Weekly Team Report' }}
+                    </h3>
                     <p>Week: {{ teamConfig.weekStartDate }} - {{ teamConfig.weekEndDate }}</p>
                 </div>
                 <div class="right">

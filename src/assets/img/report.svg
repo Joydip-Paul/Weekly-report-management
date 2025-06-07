@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="52" viewBox="8 8 48 48">
+  <!-- Page background -->
+  <rect x="8" y="8" width="48" height="48" rx="4" ry="4" fill="#e6ecf4" stroke="#2c3e50" stroke-width="2" />
+
+  <!-- Header / Title lines -->
+  <rect x="16" y="16" width="32" height="4" fill="#2c3e50" rx="1" />
+  <rect x="16" y="22" width="24" height="3" fill="#95a5a6" rx="1" />
+
+  <!-- Weekly bars -->
+  <rect x="14" y="30" width="4" height="10" fill="#3498db" />
+  <rect x="20" y="34" width="4" height="6" fill="#3498db" />
+  <rect x="26" y="28" width="4" height="12" fill="#3498db" />
+  <rect x="32" y="36" width="4" height="4" fill="#3498db" />
+  <rect x="38" y="32" width="4" height="8" fill="#3498db" />
+  <rect x="44" y="30" width="4" height="10" fill="#3498db" />
+  <rect x="50" y="35" width="4" height="5" fill="#3498db" />
+
+  <!-- Footer label -->
+  <rect x="16" y="46" width="20" height="3" fill="#95a5a6" rx="1" />
+</svg>
