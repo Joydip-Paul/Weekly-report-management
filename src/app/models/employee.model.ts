@@ -7,7 +7,7 @@ export enum MemberRole {
 export interface Task {
     module: string;
     description: string;
-    priority: 'Low' | 'Medium' | 'High'; // ✅ Must match exact literal values
+    priority: 'Low' | 'Medium' | 'High';
     completed: number;
     blocker?: string;
 }

@@ -1,0 +1,71 @@
+<div class="profile-heading">
+    <div class="profile">
+        <span class="letter-dp">{{ member.name.charAt(0) }}</span>
+        <h3>{{ member.name }}</h3>
+        <span *ngIf="member.role">({{ member.role }})</span>
+    </div>
+    <button class="main-btn bg-white" (click)="openTaskForm()">
+        <span nz-icon nzType="plus" nzTheme="outline"></span> Add Task
+    </button>
+</div>
+
+<div class="task-list">
+    <ng-container *ngIf="member.tasks && member.tasks.length > 0; else noTasks">
+        <div class="table-container">
+            <table class="tasks-table">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Description</th>
+                        <th>Progress</th>
+                        <th>Blocker</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of member.tasks" class="task-row">
+                        <td class="module-cell">
+                            <span class="module-name">{{task.module}}</span>
+                        </td>
+                        <td class="description-cell" data-label="Description">
+                            <span class="description-text">{{task.description}}</span>
+                        </td>
+                        <td class="progress-cell" data-label="Progress">
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" [style.width.%]="task.completed"></div>
+                                </div>
+                                <span class="progress-text">{{task.completed}}%</span>
+                            </div>
+                        </td>
+                        <td class="blocker-cell" data-label="Blocker">
+                            <span class="blocker-text" [class.has-blocker]="task.blocker">
+                                {{task.blocker || 'None'}}
+                            </span>
+                        </td>
+                        <td class="actions-cell">
+                            <div class="action-buttons">
+                                <button class="btn btn-edit" title="Edit Task">
+                                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                                    <span class="btn-text">Edit</span>
+                                </button>
+                                <button class="btn btn-delete" title="Delete Task">
+                                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                    <span class="btn-text">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+    <ng-template #noTasks>
+        <div class="no-data no-task">
+            <p>No tasks assigned yet. Click "Add Task" to add one.</p>
+            <button class="main-btn bg-white" (click)="openTaskForm()">
+                <span nz-icon nzType="plus" nzTheme="outline"></span> Add Task
+            </button>
+        </div>
+    </ng-template>
+</div>

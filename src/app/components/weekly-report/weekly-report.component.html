@@ -15,7 +15,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <div class="report-body">
         <div class="sub-heading">
@@ -37,37 +36,7 @@
         <ng-container *ngIf="members.length > 0; else noMembers">
             <ul class="member-list">
                 <li *ngFor="let member of members; let i = index">
-                    <div class="profile-heading">
-                        <div class="profile">
-                            <span class="letter-dp">JD</span>
-                            <h3>{{ member.name }}</h3>
-                            <span *ngIf="member.role">({{ member.role }})</span>
-                        </div>
-                        <button class="main-btn bg-white" (click)="openTaskForm(i)">
-                            <span nz-icon nzType="plus" nzTheme="outline"></span>
-                            Add Task
-                        </button>
-                    </div>
-
-                    <div class="task-list">
-                        <ng-container *ngIf="member.tasks && member.tasks.length > 0; else noTasks">
-                            <ul>
-                                <li *ngFor="let task of member.tasks ?? []">
-                                    <strong>{{ task.module }}</strong>: {{ task.description }} ({{ task.completed }}%)
-                                </li>
-                            </ul>
-                        </ng-container>
-                        <ng-template #noTasks>
-                            <div class="no-data no-task">
-                                <p>No tasks assigned yet. Click "Add Task" to add one.</p>
-                                <button class="main-btn bg-white" (click)="openTaskForm(i)">
-                                    <span nz-icon nzType="plus" nzTheme="outline"></span>
-                                    Add Task
-                                </button>
-                            </div>
-                        </ng-template>
-                    </div>
-
+                    <app-task-list [member]="member" [index]="i"></app-task-list>
                 </li>
             </ul>
         </ng-container>
