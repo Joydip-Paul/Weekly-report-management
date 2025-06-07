@@ -1,0 +1,79 @@
+<div class="report-heading">
+    <div class="container">
+        <div class="report-heading-wrapper">
+            <div class="left">
+                <h3>📋 Weekly Team Report</h3>
+                <p>Week: Jun 2, 2025 - Jun 6, 2025</p>
+            </div>
+            <div class="right">
+                <ul>
+                    <li>Team: Web Development</li>
+                    <li>Submitted By: Joydip Paul</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="report-body">
+        <div class="sub-heading">
+            <h4>Team Members & Tasks</h4>
+            <button class="main-btn" (click)="openAddMember()"><span nz-icon nzType="plus" nzTheme="outline"></span> Add
+                Team Member</button>
+        </div>
+        <ng-template #noMembers>
+            <div class="no-data">
+                <h3>No team members added yet</h3>
+                <p>Add your team members to start tracking their weekly tasks.</p>
+                <button class="main-btn" (click)="openAddMember()"><span nz-icon nzType="plus" nzTheme="outline"></span>
+                    Add
+                    First Team
+                    Member</button>
+            </div>
+        </ng-template>
+
+        <ng-container *ngIf="members.length > 0; else noMembers">
+            <ul class="member-list">
+                <li *ngFor="let member of members; let i = index">
+                    <div class="profile-heading">
+                        <div class="profile">
+                            <span class="letter-dp">JD</span>
+                            <h3>{{ member.name }}</h3>
+                            <span *ngIf="member.role">({{ member.role }})</span>
+                        </div>
+                        <button class="main-btn bg-white" (click)="openTaskForm(i)">
+                            <span nz-icon nzType="plus" nzTheme="outline"></span>
+                            Add Task
+                        </button>
+                    </div>
+
+                    <div class="task-list">
+                        <ng-container *ngIf="member.tasks && member.tasks.length > 0; else noTasks">
+                            <ul>
+                                <li *ngFor="let task of member.tasks ?? []">
+                                    <strong>{{ task.module }}</strong>: {{ task.description }} ({{ task.completed }}%)
+                                </li>
+                            </ul>
+                        </ng-container>
+                        <ng-template #noTasks>
+                            <div class="no-data no-task">
+                                <p>No tasks assigned yet. Click "Add Task" to add one.</p>
+                                <button class="main-btn bg-white" (click)="openTaskForm(i)">
+                                    <span nz-icon nzType="plus" nzTheme="outline"></span>
+                                    Add Task
+                                </button>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                </li>
+            </ul>
+        </ng-container>
+
+        <ng-template #noMembers>
+            <p>No team members added yet.</p>
+        </ng-template>
+    </div>
+</div>

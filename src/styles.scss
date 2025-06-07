@@ -1,1 +1,105 @@
-/* You can add global styles to this file, and also import other style files */
+.container {
+    max-width: 1499px;
+    margin-inline: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.main-btn {
+    background-color: #1b7db1;
+    padding: 10px 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    border: 1px solid #1b7db1;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        background-color: #146a98;
+    }
+
+    span {
+        font-size: 20px;
+    }
+
+    &.bg-white {
+        background-color: #fff;
+        color: #1b7db1;
+        border: 1px solid #1b7db1;
+    }
+}
+
+.form-group {
+    margin-bottom: 10px;
+
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+    }
+}
+
+
+.calc-body:has(.fixed-footer) .ant-drawer-body {
+    max-height: calc(100vh - 100px);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.calc-body {
+
+    .fixed-footer {
+        position: absolute;
+        right: 0;
+        background-color: #ffffff;
+        width: 100%;
+        bottom: 0;
+        padding: 10px;
+        border-top: 1px solid #c6c6c6;
+        height: 65px;
+
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    }
+
+    &.calc-body-full {
+        .fixed-footer {
+            width: 100% !important;
+        }
+    }
+}
+
+.ant-select-selector {
+    height: 42px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

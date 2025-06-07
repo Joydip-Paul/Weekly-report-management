@@ -1,0 +1,35 @@
+<form [formGroup]="taskForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label>Module</label>
+        <input nz-input formControlName="module" placeholder="e.g., Teams and Payroll" />
+    </div>
+
+    <div class="form-group">
+        <label>Task Description</label>
+        <textarea nz-input formControlName="description" placeholder="Describe the task in detail"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Priority</label>
+        <nz-select formControlName="priority" nzPlaceHolder="Select priority">
+            <nz-option [nzValue]="'Low'" nzLabel="Low"></nz-option>
+            <nz-option [nzValue]="'Medium'" nzLabel="Medium"></nz-option>
+            <nz-option [nzValue]="'High'" nzLabel="High"></nz-option>
+        </nz-select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Progress: {{ taskForm.value.completed }}%</label>
+        <nz-slider formControlName="completed"></nz-slider>
+    </div>
+
+    <div class="form-group">
+        <label>Blocker (if any)</label>
+        <input nz-input formControlName="blocker" placeholder="Describe any blockers or enter 'None'" />
+    </div>
+
+    <div class="fixed-footer">
+        <button class="main-btn w-100" [disabled]="taskForm.invalid">Add Task</button>
+    </div>
+</form>
