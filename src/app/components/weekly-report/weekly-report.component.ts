@@ -4,10 +4,11 @@ import { NzDrawerModule, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AddMemberComponent } from '../add-member/add-member.component';
 import { CommonModule } from '@angular/common';
-import { Member } from '../../models/employee.model';
-import { AddTaskComponent } from '../add-task/add-task.component';
+import { DrawerResult, Member } from '../../models/employee.model';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { TaskListComponent } from "../task-list/task-list.component";
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-weekly-report',
@@ -20,34 +21,28 @@ export class WeeklyReportComponent implements OnInit {
   members: Member[] = [];
   private drawerService = inject(NzDrawerService);
 
+  constructor(private modalService: NzModalService, private message: NzMessageService) {
+
+  }
+
   ngOnInit(): void {
     this.loadMembers();
   }
 
   openAddMember(): void {
-    const drawerRef = this.drawerService.create<AddMemberComponent, any, void>({
+    const drawerRef = this.drawerService.create<AddMemberComponent, any, DrawerResult>({
       nzTitle: 'Add Member',
       nzClosable: true,
       nzWrapClassName: 'sm-drawer calc-body',
       nzContent: AddMemberComponent
+    })
+
+    drawerRef.afterClose.subscribe((result: DrawerResult | undefined) => {
+      if (result?.success) {
+        this.loadMembers();
+      }
     });
-
-    // drawerRef.afterClose.subscribe(() => {
-    //   this.loadMembers();
-    // });
   }
-
-  // openTaskForm(index: number): void {
-  //   this.drawerService.create({
-  //     nzTitle: 'Add New Task',
-  //     nzContent: AddTaskComponent,
-  //     nzClosable: true,
-  //     nzWrapClassName: 'md-drawer calc-body',
-  //     nzContentParams: {
-  //       memberIndex: index
-  //     }
-  //   }).afterClose.subscribe(() => this.loadMembers());
-  // }
 
   private loadMembers(): void {
     const data = localStorage.getItem('teamMembers');
@@ -59,4 +54,8 @@ export class WeeklyReportComponent implements OnInit {
       : [];
   }
 
+
+  onMemberDeleted(): void {
+    this.loadMembers();
+  }
 }

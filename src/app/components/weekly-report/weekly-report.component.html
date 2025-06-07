@@ -36,7 +36,8 @@
         <ng-container *ngIf="members.length > 0; else noMembers">
             <ul class="member-list">
                 <li *ngFor="let member of members; let i = index">
-                    <app-task-list [member]="member" [index]="i"></app-task-list>
+                    <app-task-list [member]="member" [index]="i" (memberDeleted)="onMemberDeleted()">
+                    </app-task-list>
                 </li>
             </ul>
         </ng-container>

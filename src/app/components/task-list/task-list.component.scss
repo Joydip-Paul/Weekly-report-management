@@ -3,10 +3,8 @@
      justify-content: space-between;
      align-items: center;
      padding-top: 10px;
-
-     .main-btn {
-         padding: 4px 10px;
-     }
+     flex-wrap: wrap;
+     gap: 10px;
 
      .profile {
          display: flex;
@@ -28,6 +26,33 @@
          h3 {
              font-family: 18px;
              margin-bottom: 0;
+         }
+     }
+
+     .action-buttons {
+         display: flex;
+         gap: 10px;
+
+         .main-btn {
+             padding: 4px 10px;
+             transition: 0.3s;
+
+             &:hover {
+                 background-color: #1b7db1;
+                 color: #fff;
+             }
+         }
+
+         .delete-btn {
+             border: 1px solid #dc2625;
+             background-color: transparent;
+             color: #dc2625;
+             transition: 0.3s;
+
+             &:hover {
+                 background-color: #dc2625;
+                 color: #fff;
+             }
          }
      }
  }

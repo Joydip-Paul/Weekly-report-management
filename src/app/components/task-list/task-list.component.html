@@ -4,9 +4,14 @@
         <h3>{{ member.name }}</h3>
         <span *ngIf="member.role">({{ member.role }})</span>
     </div>
-    <button class="main-btn bg-white" (click)="openTaskForm()">
-        <span nz-icon nzType="plus" nzTheme="outline"></span> Add Task
-    </button>
+    <div class="action-buttons">
+        <button class="main-btn bg-white" (click)="openTaskForm()">
+            <span nz-icon nzType="plus" nzTheme="outline"></span> Add Task
+        </button>
+        <button class="main-btn delete-btn" (click)="deleteMember()" title="Delete Member">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </button>
+    </div>
 </div>
 
 <div class="task-list">
@@ -45,11 +50,11 @@
                         </td>
                         <td class="actions-cell">
                             <div class="action-buttons">
-                                <button class="btn btn-edit" title="Edit Task">
+                                <button class="btn btn-edit" title="Edit Task" (click)="editTask(task)">
                                     <span nz-icon nzType="edit" nzTheme="outline"></span>
                                     <span class="btn-text">Edit</span>
                                 </button>
-                                <button class="btn btn-delete" title="Delete Task">
+                                <button class="btn btn-delete" title="Delete Task" (click)="deleteTask(task)">
                                     <span nz-icon nzType="delete" nzTheme="outline"></span>
                                     <span class="btn-text">Delete</span>
                                 </button>
