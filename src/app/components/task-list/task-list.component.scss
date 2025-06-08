@@ -135,6 +135,10 @@
                                  -webkit-box-orient: vertical;
                                  overflow: hidden;
                              }
+
+                             @media (max-width: 767px) {
+                                 max-width: 100%;
+                             }
                          }
 
                          &.progress-cell {
